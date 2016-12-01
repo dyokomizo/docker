@@ -1,0 +1,28 @@
+FROM        ubuntu:xenial
+MAINTAINER  Daniel Yokomizo <daniel.yokomizo@gmail.com>
+
+RUN apt-get clean \
+ && apt-get update \
+ && apt-get install --yes -o Dpkg::Options::="--force-overwrite" \
+            maven \
+            nano \
+            openjdk-8-doc \
+            openjdk-8-jdk \
+            openjdk-8-source \
+            openjdk-9-doc \
+            openjdk-9-jdk \
+            openjdk-9-source \
+            wget
+
+COPY eclipse-java-mars-2-linux-gtk-x86_64.tar.gz.sha512 /opt/eclipse-java-mars-2-linux-gtk-x86_64.tar.gz.sha512
+
+RUN wget --quiet --directory-prefix=/opt http://ftp.osuosl.org/pub/eclipse/technology/epp/downloads/release/mars/2/eclipse-java-mars-2-linux-gtk-x86_64.tar.gz \
+ && sha512sum --check /opt/eclipse-java-mars-2-linux-gtk-x86_64.tar.gz.sha512 \
+ && tar --directory /opt -xzf /opt/eclipse-java-mars-2-linux-gtk-x86_64.tar.gz \
+ && rm /opt/eclipse-java-mars-2-linux-gtk-x86_64.tar.gz /opt/eclipse-java-mars-2-linux-gtk-x86_64.tar.gz.sha512
+
+RUN sed -i "/-XX:MaxPermSize=256m/d" /opt/eclipse/eclipse.ini
+
+RUN /opt/eclipse/eclipse -application org.eclipse.equinox.p2.director -repository http://download.eclipse.org/releases/mars/ -repository http://infinitest.github.io -installIU org.infinitest.eclipse.feature.feature.group
+
+CMD ["/opt/eclipse/eclipse"]
