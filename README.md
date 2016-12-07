@@ -4,3 +4,4 @@
 - [Eclipse Mars with JDK 8 & 9](eclipse-jdk9)
 - [JDownloader](jdownloader-installer)
 - [Squirrel SQL](squirrel)
+- [Sublime Text](sublime)
