@@ -5,7 +5,6 @@ set -o pipefail
 set -o nounset
 
 docker run \
-  --tty \
   --interactive \
   --user=$(id --user) \
   --env="DISPLAY" \
