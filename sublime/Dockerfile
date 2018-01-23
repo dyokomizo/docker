@@ -11,12 +11,12 @@ RUN apt-get update \
             nano \
             wget
 
-COPY sublime-text_build-3126_amd64.deb.sha512 /opt/sublime-text_build-3126_amd64.deb.sha512
+COPY sublime-text_build-3143_amd64.deb.sha512 /opt/sublime-text_build-3143_amd64.deb.sha512
 
-RUN wget --quiet --directory-prefix=/opt https://download.sublimetext.com/sublime-text_build-3126_amd64.deb \
- && sha512sum --check /opt/sublime-text_build-3126_amd64.deb.sha512 \
- && dpkg --install /opt/sublime-text_build-3126_amd64.deb \
- && rm /opt/sublime-text_build-3126_amd64.deb /opt/sublime-text_build-3126_amd64.deb.sha512
+RUN wget --quiet --directory-prefix=/opt https://download.sublimetext.com/sublime-text_build-3143_amd64.deb \
+ && sha512sum --check /opt/sublime-text_build-3143_amd64.deb.sha512 \
+ && dpkg --install /opt/sublime-text_build-3143_amd64.deb \
+ && rm /opt/sublime-text_build-3143_amd64.deb /opt/sublime-text_build-3143_amd64.deb.sha512
 
 RUN echo '#!/bin/bash'                    >  /opt/sublime \
  && echo '/opt/sublime_text/sublime_text' >> /opt/sublime \
